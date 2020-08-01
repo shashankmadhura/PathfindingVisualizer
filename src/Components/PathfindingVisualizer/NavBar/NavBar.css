@@ -1,0 +1,36 @@
+
+.navbar-brand {
+    font-weight: bold;
+}
+#clear{
+    color: white;
+}
+img{
+    height: 20px;
+    width:30px;
+    margin-left: 50px;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,1);
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    background-color: rgba(255,255,255,1);
+    color: black;
+}
+.navbar-nav .dropdown-menu {
+    background-color: #343a40!important;;
+    color: white;
+}
+.dropdown-item {
+    color: white;
+}
+.dropdown-item:hover{
+    color: black;
+}
+
+.navbar-brand:hover{
+    cursor: pointer;
+}
+.nav-link {
+    border-radius: 10px;
+}

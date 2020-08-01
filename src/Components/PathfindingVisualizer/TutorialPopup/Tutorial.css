@@ -1,0 +1,40 @@
+#tut{
+    position: absolute;
+    z-index: 3;
+    overflow: scroll;
+    background-color: rgba(255, 255, 255, 1);
+    width: 50%;
+    height: 70%;
+    margin-left: 23%;
+    margin-top: 2%;
+    border: 2px solid black;
+
+}
+.images{
+    display: flex;
+    margin-right: 10px;
+    justify-content: center;
+}
+.images > img{
+    flex: auto;
+    height: 290px;
+    margin-right: 10px;
+}
+
+#tut > p{
+    font-size: 16px;
+    font-weight: 500;
+}
+#tut >button{
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    margin-left: 50%;
+    margin-bottom: 5px;
+}
+#tut_heading{
+    text-align: center;
+    border:black;
+    font-weight: bold;
+}
+
