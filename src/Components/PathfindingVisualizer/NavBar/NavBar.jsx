@@ -23,7 +23,7 @@ export class NavBar extends Component {
       }
     
     render() {
-        const {clearGrid,clearPath,astar,dijkstra,bfs,dfs,recurDivMaze,randomMaze,recurDivMazeVertical,recurDivMazeHorizontal}=this.props
+        const {clearGrid,clearPath,astar,dijkstra,bfs,dfs,recurDivMaze,randomMaze,recurDivMazeVertical,recurDivMazeHorizontal,primsAlgo}=this.props
         const  {is_running}=this.state
         let op=is_running?"0.2":"1"
         return (
@@ -48,6 +48,10 @@ export class NavBar extends Component {
                             </NavDropdown>
 
                             <NavDropdown style={{opacity:op}} title="Generate Mazes" id="collasible-nav-dropdown">
+
+                                <NavDropdown.Item   onClick={!is_running ? ()=>{this.setState({is_running:true})
+                                    return primsAlgo()}:null}>Prim's Algorithm</NavDropdown.Item>
+
                                 <NavDropdown.Item   onClick={!is_running ? ()=>{this.setState({is_running:true})
                                     return recurDivMaze()}:null}>Recurssive Division</NavDropdown.Item>
 
@@ -59,6 +63,7 @@ export class NavBar extends Component {
 
                                 <NavDropdown.Item   onClick={!is_running ? ()=>{this.setState({is_running:true})
                                     return recurDivMazeHorizontal()}:null}>Recurssive Division (Horizontal-skew)</NavDropdown.Item>
+                                
                             </NavDropdown>
                         </Nav>
                         <Nav>
@@ -71,12 +76,24 @@ export class NavBar extends Component {
                     </Navbar.Collapse>
                 </Navbar>
 
-                <img src={homeimg} alt="source"></img><span>Starting Point</span>
-                <img src={desinationimg} alt="destination"></img><span>Destination</span>
-                <img src={shortestpathimg} alt="shortpath"></img><span>Shortest Path</span>
-                <img src={visitednodeimg} alt="visited"></img><span> Visited Nodes</span>
-                <img src={wallimg} alt="wall"></img><span> Wall</span>
-
+                <div className="notations">
+                    <div className="notation">
+                        <img src={homeimg} alt="source"></img>
+                        <span>Starting Point</span>
+                    </div>
+                    <div className="notation">
+                    <img src={desinationimg} alt="destination"></img><span>Destination</span>
+                    </div>
+                    <div className="notation">
+                    <img src={shortestpathimg} alt="shortpath"></img><span>Shortest Path</span>
+                    </div>
+                    <div className="notation">
+                    <img src={visitednodeimg} alt="visited"></img><span> Visited Nodes</span>
+                    </div>
+                    <div className="notation">
+                    <img src={wallimg} alt="wall"></img><span> Wall</span>
+                    </div>
+                </div>
 
 
             </>

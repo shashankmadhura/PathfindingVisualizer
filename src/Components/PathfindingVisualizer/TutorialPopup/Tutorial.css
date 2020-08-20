@@ -1,40 +1,83 @@
-#tut{
+.tut{
     position: absolute;
     z-index: 3;
-    overflow: scroll;
+    overflow-y: scroll;
     background-color: rgba(255, 255, 255, 1);
     width: 50%;
+    min-width: 50%;
     height: 70%;
     margin-left: 23%;
     margin-top: 2%;
     border: 2px solid black;
 
+
 }
-.images{
+.tut__heading{
     display: flex;
-    margin-right: 10px;
-    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top:0;
+    background-color: white;
+    border: 1px solid gray;
 }
-.images > img{
-    flex: auto;
-    height: 290px;
+.tut__heading > button{
+    background-color: green;
+    border: none;
+    margin-left: auto;
+    margin-top: 0;
     margin-right: 10px;
+    color: white;
+    border-radius: 10px;
+}
+.tut::-webkit-scrollbar{
+    display:none;
 }
 
-#tut > p{
+
+
+.tut > p{
+    margin-top: 10px;
     font-size: 16px;
     font-weight: 500;
 }
-#tut >button{
+.tut >button{
     background-color: green;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
     color: white;
-    border-radius: 5px;
     margin-left: 50%;
+    margin-top: 10px;
     margin-bottom: 5px;
 }
-#tut_heading{
-    text-align: center;
+
+.tut__heading > h2 {
+
+    margin-left: 37%;
     border:black;
     font-weight: bold;
+}
+
+.tutcontent{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.tutcontent > h4{
+    font-weight: 500;
+}
+
+.images{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.images >img{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    border: 1px solid black;
 }
 

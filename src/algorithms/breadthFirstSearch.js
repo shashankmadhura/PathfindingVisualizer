@@ -1,7 +1,6 @@
 export const breadthFirstSearch=(grid,start_node,finish_node)=>{
     //assign distance to the start node 
     //we will keep track of all the branches in queue FIFO
-    start_node.distance=0
     let visitedNodes=[]
     let queue=[]
     queue.push(start_node) 
@@ -31,7 +30,6 @@ return visitedNodes
     for(let node of neighbors){
         queue.push(node)
         node.isVisited=true
-        node.distance=currentNode.distance+1
         node.previousNode=currentNode
     }
 }   

@@ -38,7 +38,7 @@ export const astar=(grid,startNode,finishNode)=>{
 
 //sort the node based on f value 
 const sortOpenlistByFvalue=(openlist)=>{
-    openlist.sort((nodeA,nodeB)=>nodeA.f-nodeB.f)
+    openlist.sort((nodeA,nodeB)=> nodeA.f-nodeB.f)
 
 }
 
@@ -75,10 +75,10 @@ const updateCurrentNodeNeighbors=(currentNode,grid,finishNode,openlist,closedlis
             } 
 
             //if it is in open list update with latest f and g value ,which will be lesser than prev
-            else{      
-                upadateNodeInList(openlist,node)
+            // else{      
+            //     upadateNodeInList(openlist,node)
                
-            }
+            // }
             
         }
        
@@ -89,16 +89,16 @@ const updateCurrentNodeNeighbors=(currentNode,grid,finishNode,openlist,closedlis
 
 
 //updating the node with greater f value in the open list with new updated f value(only for repeating neighbours)
-const upadateNodeInList=(openlist,node)=>{
-    for(let i=0;i<openlist.length;i++){
-        if(node.row===openlist[i].row && node.column===openlist[i].column){
-            openlist[i]=node
-            sortOpenlistByFvalue(openlist)
-            break
-        }
+// const upadateNodeInList=(openlist,node)=>{
+//     for(let i=0;i<openlist.length;i++){
+//         if(node.row===openlist[i].row && node.column===openlist[i].column){
+//             openlist[i]=node
+//             sortOpenlistByFvalue(openlist)
+//             break
+//         }
 
-    }
-}
+//     }
+// }
 
 
 
@@ -112,11 +112,6 @@ const updateWithHeuristicAndF=(node,finishNode)=>{
     //f=distance(g)+h
     node.f=node.distance+node.h
 }
-
-
-
-
-
 
 
 

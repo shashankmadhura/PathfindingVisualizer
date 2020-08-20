@@ -1,7 +1,6 @@
 
 export const depthFirstSearch=(grid,startnode,finishnode)=>{
     //assign the distance of startnode to zero
-    startnode.distance=0
     let visitedNodes=[]
     //stack to keep track of unexplored nodes(we dont explore the node we go deep down)
     let stack=[] 
@@ -36,7 +35,6 @@ export const depthFirstSearch=(grid,startnode,finishnode)=>{
     //push each neighbour to stack and update the distance ,prev node to back track
     for(let node of neighbors){
         stack.push(node)
-        node.distance=currentNode.distance+1
         node.previousNode=currentNode
     }
 }   

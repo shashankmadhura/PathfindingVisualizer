@@ -1,8 +1,8 @@
 import {getallNodes} from '../Helpers/getAllNodes'
 
 //--size of the grid hardcoded (CHANGE THESE VALUES WHENEVER YOU CHANGE GRID SIZE)
-const LAST_ROW=18
-const LAST_COL=50
+const LAST_ROW=24
+const LAST_COL=62
 
  export const recursiveDivisionMaze=(grid, rowStart, rowEnd, colStart, colEnd, orientation, surroundingWalls,visitednodes)=> {
      //all the nodes

@@ -13,19 +13,20 @@ import {recurssiveHorizontalSkew} from '../../mazegeneraionAlgo/recurDivHorizont
 import {randomMaze} from '../../mazegeneraionAlgo/randomMaze'
 import NavBar from './NavBar/NavBar'
 import {Tutorial} from './TutorialPopup/Tutorial'
+import {primsalgo} from '../../mazegeneraionAlgo/PrimsAlgo';
+import { wait } from '@testing-library/react';
 
 
 
 //------------------------------------------------------------global variables-------------------------------------------------------
 //Initialize grid size(even numbers)(dont forget to change maze algorithm PS:in case you change)
-const ROW=18
-const COL=50
-
+const ROW=24
+const COL=62
 //change onload start and end positions here
-let START_NODE_ROW = 8;
-let START_NODE_COL = 5;
-let FINISH_NODE_ROW = 8;
-let  FINISH_NODE_COL = 46;
+let START_NODE_ROW = 10;
+let START_NODE_COL = 12;
+let FINISH_NODE_ROW = 10;
+let  FINISH_NODE_COL = 48;
 
 //change animation speed here
 const ANIMATION_SPEED=15;
@@ -180,7 +181,6 @@ export class PathfindingVisualizer extends Component {
 
             setTimeout(() => {
                 document.getElementById(`node-${visitedNodeInorder[i].row}-${visitedNodeInorder[i].column}`).classList.add('node-visited')
-                //animate shortest path
                 if(i===visitedNodeInorder.length-1){
                     this.animateShortestPath(shortestpath)
             }
@@ -226,14 +226,14 @@ export class PathfindingVisualizer extends Component {
             setTimeout(() => {
                 document.getElementById(`node-${shortestpath[i].row}-${shortestpath[i].column}`).classList.add('shortest-path')
 
-            // after 2sec enabling all the button  
+            // after 10msec enabling all the button  
             if(i===shortestpath.length-1){
                 setTimeout(()=>{
                     FINISH=true  
                     this.setState({is_running:false})
                     RUNNING=false   
                     
-                },2000)
+                },10)
             }
 
             }, i*FINAL_PATH_ANIM_SPEED);
@@ -242,12 +242,13 @@ export class PathfindingVisualizer extends Component {
     }
 
 //==================================================================MAZES===========================================================
-//-------------------------------------------------------------RECURSSIVE BACKTRACKING------------------------------------
+//-------------------------------------------------------------RECURSSIVE Division------------------------------------
 
 visualizeRecurssiveDivision=async()=>{
     await this.clearGrid()
+    RUNNING=true
     const {grid}=this.state   
-   let visitednodes=recursiveDivisionMaze(grid,2,16,2,48,"horizontal",false,[])
+   let visitednodes=recursiveDivisionMaze(grid,2,ROW-1,2,COL-1,"horizontal",false,[])
    this.animateRecurssiveDivision(visitednodes)
 
 }
@@ -259,16 +260,18 @@ visualizeRecurssiveDivision=async()=>{
 
 visualizeRecurssiveDivisionVertical=async()=>{
     await this.clearGrid()
+    RUNNING=true
     const {grid}=this.state   
-   let visitednodes=recurssiveVerticalSkew(grid,2,16,2,48,"vertical",false,[])
+   let visitednodes=recurssiveVerticalSkew(grid,2,ROW-1,2,COL-1,"vertical",false,[])
    this.animateRecurssiveDivision(visitednodes)
 
 }
 
 visualizeRecurssiveDivisionHorizontal=async()=>{
     await this.clearGrid()
+    RUNNING=true
     const {grid}=this.state   
-   let visitednodes=recurssiveHorizontalSkew(grid,2,16,2,48,"horizontal",false,[])
+   let visitednodes=recurssiveHorizontalSkew(grid,2,ROW-1,2,COL-1,"horizontal",false,[])
    this.animateRecurssiveDivision(visitednodes)
 
 }
@@ -284,11 +287,12 @@ animateRecurssiveDivision=(visitedNodeInorder)=>{
             
             document.getElementById(`node-${visitedNodeInorder[i].row}-${visitedNodeInorder[i].column}`).classList.add('node-wall')
 
-            // after 2sec enabling all the button  
+            // after 10 msec enabling all the button  
             if(i===visitedNodeInorder.length-1){
                 setTimeout(()=>{
                     this.setState({is_running:false})
-                },2000)
+                    RUNNING=false
+                },10)
             }
             
         }, i*ANIMATION_SPEED);
@@ -307,7 +311,47 @@ visualizeRandomMaze=async()=>{
     this.setState({is_running:false})
 }
 
+//-------------------------------------------------------------PRIM'S ALGO----------------------------------------------
+visulizeprimsalgo=async ()=>{
+    await this.clearGrid()
+    RUNNING=true
+    const {grid}=this.state
+    // console.log(primsalgo(this.state.grid,grid[START_NODE_ROW][START_NODE_COL],grid[FINISH_NODE_ROW][FINISH_NODE_COL]))
+    let prims=primsalgo(this.state.grid,grid[START_NODE_ROW][START_NODE_COL],grid[FINISH_NODE_ROW][FINISH_NODE_COL])
+    await this.makewall(prims)
+    
+    setTimeout(()=>{
+        this.animatePrims(prims.removedWalls)
+    },50)
+       
+    
+}
 
+makewall=(prims)=>{
+    for(let i=0;i<prims.addedWalls.length;i++){
+        document.getElementById(`node-${prims.addedWalls[i].row}-${prims.addedWalls[i].column}`).classList.add('node-wall')
+}
+}
+
+animatePrims=(removedWalls)=>{
+        
+    for(let i=0;i<removedWalls.length;i++){
+        removedWalls[i].isWall=false
+        setTimeout(() => {
+            
+            document.getElementById(`node-${removedWalls[i].row}-${removedWalls[i].column}`).classList.remove('node-wall')
+
+            // after 10 msec enabling all the button  
+            if(i===removedWalls.length-1){
+                setTimeout(()=>{
+                    this.setState({is_running:false})
+                    RUNNING=false
+                },10)
+            }
+            
+        }, i*ANIMATION_SPEED);
+    }
+}
 
 
 
@@ -638,9 +682,11 @@ handleTut=()=>{
                 randomMaze={this.visualizeRandomMaze}
                 recurDivMazeVertical={this.visualizeRecurssiveDivisionVertical}
                 recurDivMazeHorizontal={this.visualizeRecurssiveDivisionHorizontal}
+                primsAlgo={this.visulizeprimsalgo}
                 is_running={this.state.is_running}
                 ></NavBar>
-            
+                {/* <button onClick={this.visulizeprimsalgo}>prim</button> */}
+
                 <table id="grid">
                 <tbody>
                 {this.state.load?<Tutorial handleTut={this.handleTut}></Tutorial>:null}

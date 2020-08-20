@@ -4,7 +4,7 @@ export const randomMaze=(grid)=>{
     let visitednode=[]
     let counter=0
 
-    // nodes.length/3 indicates 30% walls
+    // nodes.length/3 indicates 70% walls
     while(counter!==Math.floor(nodes.length/3)){
         //pushing some random index of nodes
         //return arandom index
